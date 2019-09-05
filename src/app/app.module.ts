@@ -24,8 +24,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { NgxDhis2MenuModule } from '@iapps/ngx-dhis2-menu';
+import { NgxDhis2OrgUnitFilterModule } from '@iapps/ngx-dhis2-org-unit-filter';
 import * as fromPages from './pages';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MatMenuModule, MatButtonModule } from '@angular/material';
+import { CompletenessComponent } from './pages/completeness/completeness.component';
+import { OrgnisationUnitDetailsComponent } from './pages/orgnisation-unit-details/orgnisation-unit-details.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -33,7 +37,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, ...fromPages.pages],
+  declarations: [
+    AppComponent,
+    ...fromPages.pages,
+    CompletenessComponent,
+    OrgnisationUnitDetailsComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -52,6 +61,11 @@ export function HttpLoaderFactory(http: HttpClient) {
      * Menu  module
      */
     NgxDhis2MenuModule,
+
+    /**
+     * Organisationunit filter module
+     */
+    NgxDhis2OrgUnitFilterModule,
 
     /**
      * Translation module
@@ -73,7 +87,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
-    })
+    }),
+    MatMenuModule,
+    MatButtonModule
   ],
   providers: [{ provide: RouterStateSerializer, useClass: RouteSerializer }],
   bootstrap: [AppComponent]
