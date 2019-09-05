@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/store/reducers';
-import { selecteOrganisationUnitSuccess } from 'src/app/store/actions';
+import {
+  selectOrganisationUnitSuccess,
+  clearOrganisationUnitChildren
+} from 'src/app/store/actions';
 
 @Component({
   selector: 'app-home',
@@ -25,8 +28,9 @@ export class HomeComponent implements OnInit {
   onOrgUnitUpdate(orgunitData: any, action: string) {
     console.log(orgunitData.items[0]);
     const selectedOrganisationUnit = orgunitData.items[0];
+    this.store.dispatch(clearOrganisationUnitChildren());
     this.store.dispatch(
-      selecteOrganisationUnitSuccess({
+      selectOrganisationUnitSuccess({
         organisationUnit: selectedOrganisationUnit
       })
     );

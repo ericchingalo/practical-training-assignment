@@ -10,7 +10,7 @@ export class OrganisationUnitService {
 
   getOrgunitChildren(orgunitId: string): Observable<any> {
     return this.httpServuice.get(
-      `organisationUnits/${orgunitId}.json?ields=name,displayName,children[id,%20level,lastUpdated,name,shortName,children[id,name,level]]`
+      `organisationUnits/${orgunitId}.json?fields=children[id,level,lastUpdated,name,shortName,children[id,name]]`
     );
   }
 }

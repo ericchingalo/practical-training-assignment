@@ -23,19 +23,23 @@ export const loadOrganisationUnitChildrenFail = createAction(
   props<{ error: ErrorMessage }>()
 );
 
+export const clearOrganisationUnitChildren = createAction(
+  '[ORGANISATION UNIT] clear organisation units'
+);
+
 /**
  * selected orgunit actions
  */
-export const selecteOrganisationUnit = createAction(
+export const selectOrganisationUnit = createAction(
   '[ORGANISATION UNIT] select Organisation unit',
   props<{ id: string }>()
 );
 
-export const selecteOrganisationUnitFail = createAction(
+export const selectOrganisationUnitFail = createAction(
   '[ORGANISATION UNIT] select Organisation unit Fail'
 );
 
-export const selecteOrganisationUnitSuccess = createAction(
+export const selectOrganisationUnitSuccess = createAction(
   '[ORGANISATION UNIT] select Organisation unit Success',
   props<{ organisationUnit: OrganisationUnit }>()
 );

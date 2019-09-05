@@ -7,11 +7,12 @@ import {
   OrganisationUnitChildrenState
 } from '../states/organisation-unit.sate';
 import {
-  selecteOrganisationUnitSuccess,
-  selecteOrganisationUnitFail,
+  selectOrganisationUnitSuccess,
+  selectOrganisationUnitFail,
   loadOrganisationUnitChildren,
   loadOrganisationUnitChildrenSuccess,
-  loadOrganisationUnitChildrenFail
+  loadOrganisationUnitChildrenFail,
+  clearOrganisationUnitChildren
 } from '../actions';
 import {
   loadingBaseState,
@@ -24,12 +25,12 @@ import {
  */
 export const orgunitReducer = createReducer(
   initialSelectedOrgunitState,
-  on(selecteOrganisationUnitSuccess, (state, { organisationUnit }) => ({
+  on(selectOrganisationUnitSuccess, (state, { organisationUnit }) => ({
     ...state,
     selectedOrgunit: organisationUnit,
     selected: true
   })),
-  on(selecteOrganisationUnitFail, state => ({ ...state, selected: false }))
+  on(selectOrganisationUnitFail, state => ({ ...state, selected: false }))
 );
 
 export function selectedOrganisationUnitReducer(
@@ -55,7 +56,8 @@ export const orgunitChildrenReducer = createReducer(
     ...state,
     ...errorBaseState,
     error
-  }))
+  })),
+  on(clearOrganisationUnitChildren, state => adapter.removeAll(state))
 );
 
 export function organisationUnitChildrenReducer(
