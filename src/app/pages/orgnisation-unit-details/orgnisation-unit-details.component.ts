@@ -10,7 +10,8 @@ import {
   getSelectedOrganisationUnit,
   getSelectedOrganisationUnitStatus,
   getOrganisationUnitChildren,
-  getOrganisationUnitChildrenLoadedState
+  getOrganisationUnitChildrenLoadedState,
+  leafOrgunit
 } from 'src/app/store/selectors/organisation-unit.selectors';
 
 @Component({
@@ -23,6 +24,7 @@ export class OrgnisationUnitDetailsComponent implements OnInit {
   selectedOrganisationUnitStatus$: Observable<boolean>;
   organisationUnitChildren$: Observable<OrganisationUnitChildren[]>;
   organisationUnitChildrenLoaded$: Observable<boolean>;
+  isLeafOrganisation$: Observable<boolean>;
 
   constructor(private store: Store<State>) {}
 
@@ -39,5 +41,6 @@ export class OrgnisationUnitDetailsComponent implements OnInit {
     this.organisationUnitChildrenLoaded$ = this.store.select(
       getOrganisationUnitChildrenLoadedState
     );
+    this.isLeafOrganisation$ = this.store.select(leafOrgunit);
   }
 }

@@ -41,3 +41,8 @@ export const getOrganisationUnitChildrenLoadedState = createSelector(
   getOrganisationUnitChildrenState,
   (state: OrganisationUnitChildrenState) => state.loaded
 );
+
+export const leafOrgunit = createSelector(
+  getOrganisationUnitChildren,
+  children => children.length === 0
+);

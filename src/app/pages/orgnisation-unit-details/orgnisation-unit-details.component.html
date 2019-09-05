@@ -5,14 +5,21 @@
     <p>Level: {{ (selectedOrganisationUnit$ | async).level }}</p>
   </mat-card>
 
-  <div *ngIf="organisationUnitChildrenLoaded$ | async">
+  <div
+    *ngIf="
+      (organisationUnitChildrenLoaded$ | async) &&
+      !(isLeafOrganisation$ | async)
+    "
+  >
     <h5>Children:</h5>
-    <table class="table">
+    <table class="table table-hoverable">
       <thead class="thead-light">
         <tr>
           <th scope="col">S/N</th>
           <th scope="col">Name</th>
           <th scope="col">Last Updated</th>
+          <th></th>
+          <!-- <th><i class="fa fa-cog"></i></th> -->
         </tr>
       </thead>
       <tbody>
@@ -25,6 +32,26 @@
           <td>{{ count + 1 }}</td>
           <td>{{ orgunitChild.name }}</td>
           <td>{{ orgunitChild.lastUpdated | date }}</td>
+          <td>
+            <button
+              *ngIf="orgunitChild.leaf"
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </td>
         </tr>
       </tbody>
     </table>

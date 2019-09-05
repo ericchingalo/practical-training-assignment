@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class OrganisationUnitService {
   constructor(private httpServuice: NgxDhis2HttpClientService) {}
-
+  s;
   getOrgunitChildren(orgunitId: string): Observable<any> {
     return this.httpServuice.get(
-      `organisationUnits/${orgunitId}.json?fields=children[id,level,lastUpdated,name,shortName,children[id,name]]`
+      `organisationUnits/${orgunitId}.json?fields=children[id,lastUpdated,level,name,shortName,leaf,displayName,displayShortName,openingDate,coordinates,children[id,name,level]]`
     );
   }
 }
