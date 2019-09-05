@@ -2,7 +2,8 @@ import { createSelector } from '@ngrx/store';
 import { getRootState, State } from '../reducers';
 import {
   SelectedOrgunitState,
-  selectAllOrgunitChildren
+  selectAllOrgunitChildren,
+  OrganisationUnitChildrenState
 } from '../states/organisation-unit.sate';
 
 /**
@@ -31,7 +32,12 @@ export const getOrganisationUnitChildrenState = createSelector(
   (state: State) => state.organisationUnitChildren
 );
 
-export const OrganisationUnitChildren = createSelector(
+export const getOrganisationUnitChildren = createSelector(
   getOrganisationUnitChildrenState,
   selectAllOrgunitChildren
+);
+
+export const getOrganisationUnitChildrenLoadedState = createSelector(
+  getOrganisationUnitChildrenState,
+  (state: OrganisationUnitChildrenState) => state.loaded
 );

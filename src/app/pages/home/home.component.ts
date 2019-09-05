@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
   }
 
   onOrgUnitUpdate(orgunitData: any, action: string) {
-    console.log(orgunitData.items[0]);
     const selectedOrganisationUnit = orgunitData.items[0];
     this.store.dispatch(clearOrganisationUnitChildren());
     this.store.dispatch(

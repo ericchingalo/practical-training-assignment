@@ -27,7 +27,12 @@ import { NgxDhis2MenuModule } from '@iapps/ngx-dhis2-menu';
 import { NgxDhis2OrgUnitFilterModule } from '@iapps/ngx-dhis2-org-unit-filter';
 import * as fromPages from './pages';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { MatMenuModule, MatButtonModule } from '@angular/material';
+import {
+  MatMenuModule,
+  MatButtonModule,
+  MatTableModule,
+  MatCardModule
+} from '@angular/material';
 import { CompletenessComponent } from './pages/completeness/completeness.component';
 import { OrgnisationUnitDetailsComponent } from './pages/orgnisation-unit-details/orgnisation-unit-details.component';
 
@@ -89,7 +94,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       enabled: environment.production
     }),
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [{ provide: RouterStateSerializer, useClass: RouteSerializer }],
   bootstrap: [AppComponent]

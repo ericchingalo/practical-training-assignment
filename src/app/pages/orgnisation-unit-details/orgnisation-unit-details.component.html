@@ -1,3 +1,40 @@
-<p>
-  orgnisation-unit-details works!
-</p>
+<div *ngIf="selectedOrganisationUnitStatus$ | async">
+  <mat-card>
+    <h4>Selected Organisation unit:</h4>
+    <p>Name: {{ (selectedOrganisationUnit$ | async).name }}</p>
+    <p>Level: {{ (selectedOrganisationUnit$ | async).level }}</p>
+  </mat-card>
+
+  <div *ngIf="organisationUnitChildrenLoaded$ | async">
+    <h5>Children:</h5>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">S/N</th>
+          <th scope="col">Name</th>
+          <th scope="col">Last Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let orgunitChild of organisationUnitChildren$ | async;
+            let count = index
+          "
+        >
+          <td>{{ count + 1 }}</td>
+          <td>{{ orgunitChild.name }}</td>
+          <td>{{ orgunitChild.lastUpdated | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!(organisationUnitChildrenLoaded$ | async)">
+    <p>Loading children</p>
+  </div>
+</div>
+
+<div *ngIf="!(selectedOrganisationUnitStatus$ | async)">
+  <p>select Organisation unit</p>
+</div>
