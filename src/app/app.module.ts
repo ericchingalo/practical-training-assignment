@@ -30,8 +30,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import {
   MatMenuModule,
   MatButtonModule,
-  MatTableModule,
-  MatCardModule
+  MatCardModule,
+  MatIconModule
 } from '@angular/material';
 import { CompletenessComponent } from './pages/completeness/completeness.component';
 import { OrgnisationUnitDetailsComponent } from './pages/orgnisation-unit-details/orgnisation-unit-details.component';
@@ -95,7 +95,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     MatMenuModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ],
   providers: [{ provide: RouterStateSerializer, useClass: RouteSerializer }],
   bootstrap: [AppComponent]
