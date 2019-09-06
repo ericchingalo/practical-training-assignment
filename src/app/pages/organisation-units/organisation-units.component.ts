@@ -13,20 +13,21 @@ import {
   getOrganisationUnitChildrenLoadedState,
   leafOrgunit
 } from 'src/app/store/selectors/organisation-unit.selectors';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-orgnisation-unit-details',
-  templateUrl: './orgnisation-unit-details.component.html',
-  styleUrls: ['./orgnisation-unit-details.component.css']
+  selector: 'app-organisation-units',
+  templateUrl: './organisation-units.component.html',
+  styleUrls: ['./organisation-units.component.css']
 })
-export class OrgnisationUnitDetailsComponent implements OnInit {
+export class OrganisationUnitsComponent implements OnInit {
   selectedOrganisationUnit$: Observable<OrganisationUnit>;
   selectedOrganisationUnitStatus$: Observable<boolean>;
   organisationUnitChildren$: Observable<OrganisationUnitChildren[]>;
   organisationUnitChildrenLoaded$: Observable<boolean>;
   isLeafOrganisation$: Observable<boolean>;
 
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<State>, private router: Router) {}
 
   ngOnInit() {
     this.selectedOrganisationUnit$ = this.store.select(
@@ -42,5 +43,10 @@ export class OrgnisationUnitDetailsComponent implements OnInit {
       getOrganisationUnitChildrenLoadedState
     );
     this.isLeafOrganisation$ = this.store.select(leafOrgunit);
+  }
+
+  onEditChild(e, id: string) {
+    e.stopPropagation();
+    this.router.navigate([`edit-orgunit/${id}`]);
   }
 }

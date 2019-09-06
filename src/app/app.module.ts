@@ -34,7 +34,9 @@ import {
   MatIconModule
 } from '@angular/material';
 import { CompletenessComponent } from './pages/completeness/completeness.component';
-import { OrgnisationUnitDetailsComponent } from './pages/orgnisation-unit-details/orgnisation-unit-details.component';
+import { OrganisationUnitsComponent } from './pages/organisation-units/organisation-units.component';
+import { OrganisationUnitEditComponent } from './pages/organisation-unit-edit/organisation-unit-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -46,7 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     ...fromPages.pages,
     CompletenessComponent,
-    OrgnisationUnitDetailsComponent
+    OrganisationUnitsComponent,
+    OrganisationUnitEditComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
+    ReactiveFormsModule,
     /**
      * Menu  module
      */

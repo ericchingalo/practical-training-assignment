@@ -2,7 +2,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './pages';
 import { CompletenessComponent } from './pages/completeness/completeness.component';
-import { OrgnisationUnitDetailsComponent } from './pages/orgnisation-unit-details/orgnisation-unit-details.component';
+import { OrganisationUnitsComponent } from './pages/organisation-units/organisation-units.component';
+import { OrganisationUnitEditComponent } from './pages/organisation-unit-edit/organisation-unit-edit.component';
 
 export const routes: Routes = [
   {
@@ -11,7 +12,8 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'completeness', pathMatch: 'full' },
       { path: 'completeness', component: CompletenessComponent },
-      { path: 'orgunit/:id', component: OrgnisationUnitDetailsComponent }
+      { path: 'orgunit/:id', component: OrganisationUnitsComponent },
+      { path: 'edit-orgunit/:id', component: OrganisationUnitEditComponent }
     ]
   }
 ];

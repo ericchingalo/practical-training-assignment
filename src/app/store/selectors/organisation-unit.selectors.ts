@@ -1,4 +1,6 @@
 import { createSelector } from '@ngrx/store';
+import * as _ from 'lodash';
+
 import { getRootState, State } from '../reducers';
 import {
   SelectedOrgunitState,
@@ -41,6 +43,12 @@ export const getOrganisationUnitChildrenLoadedState = createSelector(
   getOrganisationUnitChildrenState,
   (state: OrganisationUnitChildrenState) => state.loaded
 );
+
+export const getSelectedOrgunitChild = id =>
+  createSelector(
+    getOrganisationUnitChildren,
+    children => _.find(children, child => child.id === id)
+  );
 
 export const leafOrgunit = createSelector(
   getOrganisationUnitChildren,
