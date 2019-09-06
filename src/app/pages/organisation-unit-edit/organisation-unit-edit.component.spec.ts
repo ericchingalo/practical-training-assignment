@@ -5,6 +5,17 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from 'src/app/store/reducers';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import {
+  MatMenuModule,
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatButtonToggleModule
+} from '@angular/material';
 
 describe('OrganisationUnitEditComponent', () => {
   let component: OrganisationUnitEditComponent;
@@ -15,7 +26,25 @@ describe('OrganisationUnitEditComponent', () => {
       imports: [
         StoreModule.forRoot(reducers, { metaReducers }),
         RouterTestingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatButtonToggleModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatButtonToggleModule
       ],
       declarations: [OrganisationUnitEditComponent]
     }).compileComponents();

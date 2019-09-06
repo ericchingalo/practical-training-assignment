@@ -31,12 +31,17 @@ import {
   MatMenuModule,
   MatButtonModule,
   MatCardModule,
-  MatIconModule
+  MatIconModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatButtonToggleModule
 } from '@angular/material';
 import { CompletenessComponent } from './pages/completeness/completeness.component';
 import { OrganisationUnitsComponent } from './pages/organisation-units/organisation-units.component';
 import { OrganisationUnitEditComponent } from './pages/organisation-unit-edit/organisation-unit-edit.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -66,6 +71,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
     ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonToggleModule,
     /**
      * Menu  module
      */

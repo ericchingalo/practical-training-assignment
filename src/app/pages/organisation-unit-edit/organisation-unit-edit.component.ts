@@ -24,7 +24,7 @@ export class OrganisationUnitEditComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
     this.selectedOrgunitChild$ = this.store.select(getSelectedOrgunitChild(id));
-    this.generateForm();
+    this.organisationUnitForm = this.generateForm();
   }
 
   generateForm() {
@@ -39,7 +39,8 @@ export class OrganisationUnitEditComponent implements OnInit {
       address: new FormControl(''),
       email: new FormControl(''),
       contactPerson: new FormControl(''),
-      code: new FormControl('')
+      code: new FormControl(''),
+      phoneNumber: new FormControl('')
     });
   }
 }
