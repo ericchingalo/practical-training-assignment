@@ -12,7 +12,13 @@ import {
   loadOrganisationUnitChildren,
   loadOrganisationUnitChildrenSuccess,
   loadOrganisationUnitChildrenFail,
-  clearOrganisationUnitChildren
+  clearOrganisationUnitChildren,
+  deleteOrganisationUnitChild,
+  deleteOrganisationUnitChildFail,
+  deleteOrganisationUnitChildSuccess,
+  editOrganisationUnitChild,
+  editOrganisationUnitChildFail,
+  editOrganisationUnitChildSuccess
 } from '../actions';
 import {
   loadingBaseState,
@@ -57,7 +63,37 @@ export const orgunitChildrenReducer = createReducer(
     ...errorBaseState,
     error
   })),
-  on(clearOrganisationUnitChildren, state => adapter.removeAll(state))
+  on(clearOrganisationUnitChildren, state => adapter.removeAll(state)),
+  on(deleteOrganisationUnitChild, state => ({
+    ...state,
+    deleted: false,
+    deleting: false
+  })),
+  on(deleteOrganisationUnitChildFail, (state, { error }) => ({
+    ...state,
+    ...errorBaseState,
+    deleted: false,
+    deleting: false,
+    error
+  })),
+  on(deleteOrganisationUnitChildSuccess, (state, { id }) =>
+    adapter.removeOne(id, { ...state, deleted: true, deleting: false })
+  ),
+  on(editOrganisationUnitChild, state => ({
+    ...state,
+    edited: false,
+    editing: true
+  })),
+  on(editOrganisationUnitChildFail, (state, { error }) => ({
+    ...state,
+    ...errorBaseState,
+    edited: false,
+    editing: false,
+    error
+  })),
+  on(editOrganisationUnitChildSuccess, (state, { child }) =>
+    adapter.updateOne(child, { ...state, edited: true, editing: false })
+  )
 );
 
 export function organisationUnitChildrenReducer(

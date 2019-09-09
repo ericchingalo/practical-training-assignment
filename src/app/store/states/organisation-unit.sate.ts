@@ -10,7 +10,12 @@ import {
  */
 export interface OrganisationUnitChildrenState
   extends BaseState,
-    EntityState<OrganisationUnitChildren> {}
+    EntityState<OrganisationUnitChildren> {
+  editing: boolean;
+  edited: boolean;
+  deleting: boolean;
+  deleted: boolean;
+}
 
 export function selectOrgunitChildId(child: OrganisationUnitChildren) {
   return child.id;
@@ -22,7 +27,11 @@ export const adapter = createEntityAdapter({
 });
 
 export const initialOrganisationUnitChildrenState = adapter.getInitialState({
-  ...initialBaseState
+  ...initialBaseState,
+  editing: false,
+  edited: false,
+  deleting: false,
+  deleted: false
 });
 
 export const {

@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType, act } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { OrganisationUnitService } from 'src/app/services/organisation-unit.service';
 import {
   selectOrganisationUnitSuccess,
   loadOrganisationUnitChildrenSuccess,
   loadOrganisationUnitChildrenFail,
-  loadOrganisationUnitChildren
+  loadOrganisationUnitChildren,
+  editOrganisationUnitChild,
+  editOrganisationUnitChildSuccess,
+  editOrganisationUnitChildFail,
+  deleteOrganisationUnitChild,
+  deleteOrganisationUnitChildSuccess,
+  deleteOrganisationUnitChildFail
 } from '../actions';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -37,6 +43,38 @@ export class OrganisationUnitEffects {
           ),
           catchError(err =>
             of(loadOrganisationUnitChildrenFail({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  editOrganisationUnitChild$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(editOrganisationUnitChild),
+      switchMap(action =>
+        this.orgunitService.editOrgunitChildren(action.child).pipe(
+          map(() =>
+            editOrganisationUnitChildSuccess({
+              child: { id: action.child.id, changes: action.child }
+            })
+          ),
+          catchError(error =>
+            of(editOrganisationUnitChildFail({ error: error }))
+          )
+        )
+      )
+    )
+  );
+
+  deleteOrganisationUnitChild$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteOrganisationUnitChild),
+      switchMap(action =>
+        this.orgunitService.deleteOrgunitChild(action.id).pipe(
+          map(() => deleteOrganisationUnitChildSuccess({ id: action.id })),
+          catchError(error =>
+            of(deleteOrganisationUnitChildFail({ error: error }))
           )
         )
       )
