@@ -1,16 +1,9 @@
 mat-form-field {
   width: 100%;
 }
-mat-button-toggle-group {
+
+button {
   margin: 5px;
-}
-mat-button-toggle {
-  text-align: center;
-  width: 150px;
-}
-.save {
-  background-color: rgb(39, 102, 150);
-  color: white;
 }
 .cancel {
   color: rgb(255, 152, 0);

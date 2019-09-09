@@ -1,77 +1,118 @@
-<form formGroup="organisationUnitForm" class="example-form">
-  <mat-form-field class="example-full-width" MatFormFieldControl="name">
-    <input matInput placeholder="Name" formControlName="name" required />
-  </mat-form-field>
-  <mat-form-field class="example-full-width" MatFormFieldControl="shortName">
-    <input matInput placeholder="Short Name" formControlName="shortName" />
-  </mat-form-field>
-  <mat-form-field class="example-full-width" MatFormFieldControl="code">
-    <input matInput placeholder="Code" formControlName="code" />
-  </mat-form-field>
-  <mat-form-field class="example-full-width" MatFormFieldControl="description">
-    <input matInput placeholder="Description" formControlName="description" />
-  </mat-form-field>
-  <mat-form-field class="example-full-width" MatFormFieldControl="openingDate">
-    <input
-      matInput
-      [matDatepicker]="picker"
-      type="date"
-      placeholder="Opening date"
-      formControlName="openingDate"
-    />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field class="example-full-width" MatFormFieldControl="closedDate">
-    <input
-      matInput
-      [matDatepicker]="pickeror"
-      type="date"
-      placeholder="Closed date"
-      formControlName="closedDate"
-    />
-    <mat-datepicker-toggle matSuffix [for]="pickeror"></mat-datepicker-toggle>
-    <mat-datepicker #pickeror></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field class="example-full-width" MatFormFieldControl="comments">
-    <input matInput placeholder="Comment" formControlName="comments" />
-  </mat-form-field>
-  <mat-form-field class="example-full-width" MatFormFieldControl="url">
-    <input matInput type="url" placeholder="URL" formControlName="url" />
-  </mat-form-field>
-  <mat-form-field class="example-full-width" MatFormFieldControl="conactPerson">
-    <input
-      matInput
-      placeholder="Contact person"
-      formControlName="conactPerson"
-    />
-  </mat-form-field>
-  <mat-form-field class="example-full-width" MatFormFieldControl="address">
-    <input matInput placeholder="Address" formControlName="address" />
-  </mat-form-field>
-  <mat-form-field class="example-full-width" MatFormFieldControl="email">
-    <input matInput type="email" placeholder="Email" formControlName="email" />
-  </mat-form-field>
-  <mat-form-field class="example-full-width" MatFormFieldControl="phoneNumber">
-    <input
-      matInput
-      type="tel"
-      placeholder="Phone number"
-      formControlName="phoneNumber"
-    />
-  </mat-form-field>
-  <mat-button-toggle-group
-    appearance="legacy"
-    name="fontStyle"
-    aria-label="Font Style"
-  >
-    <mat-button-toggle class="save" value="save">SAVE</mat-button-toggle>
-  </mat-button-toggle-group>
-  <mat-button-toggle-group
-    appearance="legacy"
-    name="fontStyle"
-    aria-label="Font Style"
-  >
-    <mat-button-toggle class="cancel" value="cancel">CANCEL</mat-button-toggle>
-  </mat-button-toggle-group>
-</form>
+<div class="row">
+  <div class="col-md-8">
+    <form
+      [formGroup]="organisationUnitForm"
+      class="example-form"
+      (ngSubmit)="editOrgunit($event)"
+    >
+      <mat-form-field class="example-full-width" MatFormFieldControl="name">
+        <input matInput placeholder="Name" formControlName="name" required />
+      </mat-form-field>
+      <mat-form-field
+        class="example-full-width"
+        MatFormFieldControl="shortName"
+      >
+        <input matInput placeholder="Short Name" formControlName="shortName" />
+      </mat-form-field>
+      <mat-form-field class="example-full-width" MatFormFieldControl="code">
+        <input matInput placeholder="Code" formControlName="code" />
+      </mat-form-field>
+      <mat-form-field
+        class="example-full-width"
+        MatFormFieldControl="description"
+      >
+        <input
+          matInput
+          placeholder="Description"
+          formControlName="description"
+        />
+      </mat-form-field>
+      <mat-form-field
+        class="example-full-width"
+        MatFormFieldControl="openingDate"
+      >
+        <input
+          matInput
+          required
+          [matDatepicker]="picker"
+          placeholder="Opening date"
+          formControlName="openingDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field
+        class="example-full-width"
+        MatFormFieldControl="closedDate"
+      >
+        <input
+          matInput
+          [matDatepicker]="pickeror"
+          placeholder="Closed date"
+          formControlName="closedDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickeror"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickeror></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" MatFormFieldControl="comments">
+        <input matInput placeholder="Comment" formControlName="comments" />
+      </mat-form-field>
+      <mat-form-field class="example-full-width" MatFormFieldControl="url">
+        <input matInput type="url" placeholder="URL" formControlName="url" />
+      </mat-form-field>
+      <mat-form-field
+        class="example-full-width"
+        MatFormFieldControl="contactPerson"
+      >
+        <input
+          matInput
+          placeholder="Contact person"
+          formControlName="contactPerson"
+        />
+      </mat-form-field>
+      <mat-form-field class="example-full-width" MatFormFieldControl="address">
+        <input matInput placeholder="Address" formControlName="address" />
+      </mat-form-field>
+      <mat-form-field class="example-full-width" MatFormFieldControl="email">
+        <input
+          matInput
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+        />
+      </mat-form-field>
+      <mat-form-field
+        class="example-full-width"
+        MatFormFieldControl="phoneNumber"
+      >
+        <input
+          matInput
+          type="tel"
+          placeholder="Phone number"
+          formControlName="phoneNumber"
+        />
+      </mat-form-field>
+
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        *ngIf="organisationUnitForm.valid"
+      >
+        SAVE
+      </button>
+
+      <button
+        mat-raised-button
+        *ngIf="organisationUnitForm.valid"
+        (click)="onCancel($event)"
+        class="cancel"
+      >
+        CANCEL
+      </button>
+    </form>
+  </div>
+</div>

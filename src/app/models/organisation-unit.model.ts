@@ -22,6 +22,7 @@ export interface OrganisationUnitChildren {
   displayShortName: string;
   openingDate: string;
   closedDate: string;
+  phoneNumber: string;
   url: string;
   coordinates: string;
   childern: OrganisationUnit[];

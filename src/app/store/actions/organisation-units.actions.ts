@@ -4,6 +4,7 @@ import {
   OrganisationUnitChildren,
   OrganisationUnit
 } from 'src/app/models/organisation-unit.model';
+import { Update } from '@ngrx/entity';
 
 /**
  * orgunit children actions
@@ -23,6 +24,32 @@ export const loadOrganisationUnitChildrenFail = createAction(
   props<{ error: ErrorMessage }>()
 );
 
+export const deleteOrganisationUnitChild = createAction(
+  '[ORGANISATION UNIT] delete Organisation Unit',
+  props<{ id: string }>()
+);
+export const deleteOrganisationUnitChildFail = createAction(
+  '[ORGANISATION UNIT] delete Organisation Unit',
+  props<{ error: ErrorMessage }>()
+);
+export const deleteOrganisationUnitChildSuccess = createAction(
+  '[ORGANISATION UNIT] delete Organisation Unit',
+  props<{ id: string }>()
+);
+
+export const editOrganisationUnitChild = createAction(
+  '[ORGANISATION UNIT] delete Organisation Unit ',
+  props<{ child: OrganisationUnitChildren }>()
+);
+
+export const editOrganisationUnitChildFail = createAction(
+  '[ORGANISATION UNIT] delete Organisation Unit ',
+  props<{ error: ErrorMessage }>()
+);
+export const editOrganisationUnitChildSuccess = createAction(
+  '[ORGANISATION UNIT] delete Organisation Unit ',
+  props<{ child: Update<OrganisationUnitChildren> }>()
+);
 export const clearOrganisationUnitChildren = createAction(
   '[ORGANISATION UNIT] clear organisation units'
 );

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
 import { Observable } from 'rxjs';
+import { OrganisationUnitChildren } from '../models/organisation-unit.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +15,16 @@ export class OrganisationUnitService {
     return this.httpServuice.get(
       `organisationUnits/${orgunitId}.json?fields=${fields}`
     );
+  }
+
+  editOrgunitChildren(orgunitChild: OrganisationUnitChildren): Observable<any> {
+    return this.httpServuice.post(
+      `organisationUnits/${orgunitChild.id}`,
+      orgunitChild
+    );
+  }
+
+  deleteOrgunitChild(orgunitId): Observable<any> {
+    return this.httpServuice.delete(`organisationUnits/${orgunitId}`);
   }
 }
