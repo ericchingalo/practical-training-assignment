@@ -58,7 +58,9 @@ export class OrganisationUnitEffects {
         console.log(action);
         return this.orgunitService.editOrgunitChildren(action.child).pipe(
           map(() => {
-            this.router.navigate(['']);
+            this.router.navigate([
+              `/organisationunit/${action.child.parent.id}`
+            ]);
             return editOrganisationUnitChildSuccess({
               child: { id: action.child.id, changes: action.child }
             });

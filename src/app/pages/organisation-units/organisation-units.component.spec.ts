@@ -6,7 +6,8 @@ import {
   MatCardModule,
   MatIconModule,
   MatMenuModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from 'src/app/store/reducers';
@@ -23,6 +24,7 @@ describe('OrganisationUnitsComponent', () => {
         MatIconModule,
         MatMenuModule,
         MatDialogModule,
+        MatProgressBarModule,
         StoreModule.forRoot(reducers, { metaReducers })
       ],
       declarations: [OrganisationUnitsComponent]
