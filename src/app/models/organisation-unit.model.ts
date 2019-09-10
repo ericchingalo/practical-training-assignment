@@ -8,6 +8,7 @@ export interface OrganisationUnit {
 export interface OrganisationUnitChildren {
   id: string;
   lastUpdated: string;
+  created: string;
   level: number;
   name: string;
   code: string;

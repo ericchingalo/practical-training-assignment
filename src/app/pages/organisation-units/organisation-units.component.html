@@ -33,7 +33,6 @@
           <td>{{ orgunitChild.lastUpdated | date }}</td>
           <td>
             <button
-              *ngIf="orgunitChild.leaf"
               mat-icon-button
               [matMenuTriggerFor]="menu"
               aria-label="Example icon-button with a menu"
@@ -42,6 +41,7 @@
             </button>
             <mat-menu #menu="matMenu">
               <button
+                *ngIf="orgunitChild.leaf"
                 mat-menu-item
                 (click)="onEditChild($event, orgunitChild.id)"
               >
@@ -49,6 +49,14 @@
                 <span>Edit</span>
               </button>
               <button
+                mat-menu-item
+                (click)="onOpenDetails($event, orgunitChild)"
+              >
+                <mat-icon>details</mat-icon>
+                <span>Details</span>
+              </button>
+              <button
+                *ngIf="orgunitChild.leaf"
                 mat-menu-item
                 (click)="onDeleteChild($event, orgunitChild.id)"
               >

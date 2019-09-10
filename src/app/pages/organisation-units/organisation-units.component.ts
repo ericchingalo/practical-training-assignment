@@ -15,6 +15,8 @@ import {
 } from 'src/app/store/selectors/organisation-unit.selectors';
 import { Router } from '@angular/router';
 import { deleteOrganisationUnitChild } from 'src/app/store/actions';
+import { MatDialog } from '@angular/material';
+import { OrganisationUnitDetailsComponent } from '../organisation-unit-details/organisation-unit-details.component';
 
 @Component({
   selector: 'app-organisation-units',
@@ -28,7 +30,11 @@ export class OrganisationUnitsComponent implements OnInit {
   organisationUnitChildrenLoaded$: Observable<boolean>;
   isLeafOrganisation$: Observable<boolean>;
 
-  constructor(private store: Store<State>, private router: Router) {}
+  constructor(
+    private store: Store<State>,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.selectedOrganisationUnit$ = this.store.select(
@@ -53,6 +59,16 @@ export class OrganisationUnitsComponent implements OnInit {
 
   onDeleteChild(e, id: string) {
     e.stopPropagation();
-    this.store.dispatch(deleteOrganisationUnitChild({ id: id }));
+    // this.store.dispatch(deleteOrganisationUnitChild({ id: id }));
+    console.log(id);
+  }
+
+  onOpenDetails(e, organisatioUnit) {
+    e.stopPropagation();
+    this.dialog.open(OrganisationUnitDetailsComponent, {
+      data: { organisationUnit: organisatioUnit },
+      height: '450px',
+      width: '500px'
+    });
   }
 }

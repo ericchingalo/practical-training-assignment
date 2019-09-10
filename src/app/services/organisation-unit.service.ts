@@ -11,14 +11,14 @@ export class OrganisationUnitService {
   s;
   getOrgunitChildren(orgunitId: string): Observable<any> {
     const fields =
-      'fields=name,children[id,lastUpdated,displayDescription,code,closedDatchildren[id,lastUpdated,level,name,shortName,leaf,displayName,displayShortName,openingDate,coordinates,children[id,name,level]]e,contactPerson,address,email,comment,displayComment,description,phoneNumber,url,level,name,shortName,leaf,displayName,displayShortName,openingDate,coordinates,children[id,name,level]]';
+      'fields=name,children[id,lastUpdated,displayDescription,code,created,closedDate,children[id,created,lastUpdated,level,name,shortName,leaf,displayName,displayShortName,openingDate,coordinates,children[id,name,level]]e,contactPerson,address,email,comment,displayComment,description,phoneNumber,url,level,name,shortName,leaf,displayName,displayShortName,openingDate,coordinates,children[id,name,level]]';
     return this.httpServuice.get(
       `organisationUnits/${orgunitId}.json?fields=${fields}`
     );
   }
 
   editOrgunitChildren(orgunitChild: OrganisationUnitChildren): Observable<any> {
-    return this.httpServuice.post(
+    return this.httpServuice.put(
       `organisationUnits/${orgunitChild.id}`,
       orgunitChild
     );
