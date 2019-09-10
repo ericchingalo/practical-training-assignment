@@ -25,6 +25,8 @@ export interface OrganisationUnitChildren {
   closedDate: string;
   phoneNumber: string;
   url: string;
+  path: string;
+  parent: { id: string };
   coordinates: string;
   childern: OrganisationUnit[];
 }

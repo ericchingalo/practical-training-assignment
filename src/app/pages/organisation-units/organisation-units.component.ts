@@ -13,7 +13,7 @@ import {
   getOrganisationUnitChildrenLoadedState,
   leafOrgunit
 } from 'src/app/store/selectors/organisation-unit.selectors';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { deleteOrganisationUnitChild } from 'src/app/store/actions';
 import { MatDialog } from '@angular/material';
 import { OrganisationUnitDetailsComponent } from '../organisation-unit-details/organisation-unit-details.component';
@@ -30,13 +30,16 @@ export class OrganisationUnitsComponent implements OnInit {
   organisationUnitChildrenLoaded$: Observable<boolean>;
   isLeafOrganisation$: Observable<boolean>;
 
+  parentOrgunit: string;
   constructor(
     private store: Store<State>,
     private router: Router,
+    private route: ActivatedRoute,
     private dialog: MatDialog
   ) {}
 
   ngOnInit() {
+    this.parentOrgunit = this.route.snapshot.params['parentid'];
     this.selectedOrganisationUnit$ = this.store.select(
       getSelectedOrganisationUnit
     );
@@ -54,13 +57,12 @@ export class OrganisationUnitsComponent implements OnInit {
 
   onEditChild(e, id: string) {
     e.stopPropagation();
-    this.router.navigate([`edit-orgunit/${id}`]);
+    this.router.navigate([`organisationunit/${this.parentOrgunit}/${id}`]);
   }
 
   onDeleteChild(e, id: string) {
     e.stopPropagation();
-    // this.store.dispatch(deleteOrganisationUnitChild({ id: id }));
-    console.log(id);
+    this.store.dispatch(deleteOrganisationUnitChild({ id: id }));
   }
 
   onOpenDetails(e, organisatioUnit) {

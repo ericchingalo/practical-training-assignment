@@ -26,6 +26,8 @@ export class OrganisationUnitEditComponent implements OnInit, OnDestroy {
   childSubscription: Subscription;
 
   selectedOrgunitChild$: Observable<OrganisationUnitChildren>;
+  parentId: string;
+  currentOrgunit: string;
   organisationUnitForm: FormGroup;
   organisationUnit: OrganisationUnitChildren;
   constructor(
@@ -36,14 +38,19 @@ export class OrganisationUnitEditComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.params['id'];
-    this.selectedOrgunitChild$ = this.store.select(getSelectedOrgunitChild(id));
+    this.parentId = this.route.snapshot.params['parentid'];
+    this.currentOrgunit = this.route.snapshot.params['childid'];
+    this.selectedOrgunitChild$ = this.store.select(
+      getSelectedOrgunitChild(this.currentOrgunit)
+    );
     this.organisationUnitForm = this.generateForm();
   }
 
   ngOnDestroy() {
     this.orgunitSubscription.unsubscribe();
-    this.childSubscription.unsubscribe();
+    if (this.childSubscription) {
+      this.childSubscription.unsubscribe();
+    }
   }
 
   generateForm() {
@@ -72,12 +79,16 @@ export class OrganisationUnitEditComponent implements OnInit, OnDestroy {
   editOrgunit(e) {
     e.stopPropagation();
     this.childSubscription = this.store
-      .select(getSelectedOrgunitChildChildren(this.route.snapshot.params['id']))
+      .select(getSelectedOrgunitChildChildren(this.currentOrgunit))
       .subscribe(children => {
         const orgunit = {
           ...this.organisationUnitForm.value,
           children: children,
-          id: this.route.snapshot.params['id']
+          id: this.currentOrgunit,
+          parent: {
+            id: this.parentId
+          },
+          path: this.organisationUnit.path
         };
         this.store.dispatch(editOrganisationUnitChild({ child: orgunit }));
       });
@@ -85,6 +96,6 @@ export class OrganisationUnitEditComponent implements OnInit, OnDestroy {
 
   onCancel(e) {
     e.stopPropagation();
-    this.router.navigate(['/']);
+    this.router.navigate([`/organisationunit/${this.parentId}`]);
   }
 }

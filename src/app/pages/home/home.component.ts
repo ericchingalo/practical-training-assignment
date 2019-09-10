@@ -33,6 +33,6 @@ export class HomeComponent implements OnInit {
         organisationUnit: selectedOrganisationUnit
       })
     );
-    this.router.navigate([`/orgunit/${selectedOrganisationUnit.id}`]);
+    this.router.navigate([`/organisationunit/${selectedOrganisationUnit.id}`]);
   }
 }

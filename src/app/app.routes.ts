@@ -12,8 +12,14 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'completeness', pathMatch: 'full' },
       { path: 'completeness', component: CompletenessComponent },
-      { path: 'orgunit/:id', component: OrganisationUnitsComponent },
-      { path: 'edit-orgunit/:id', component: OrganisationUnitEditComponent }
+      {
+        path: 'organisationunit/:parentid',
+        component: OrganisationUnitsComponent
+      },
+      {
+        path: 'organisationunit/:parentid/:childid',
+        component: OrganisationUnitEditComponent
+      }
     ]
   }
 ];
