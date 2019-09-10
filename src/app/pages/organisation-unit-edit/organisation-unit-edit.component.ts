@@ -4,13 +4,17 @@ import { State } from 'src/app/store/reducers';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { OrganisationUnitChildren } from 'src/app/models/organisation-unit.model';
-import { getSelectedOrgunitChild } from 'src/app/store/selectors/organisation-unit.selectors';
+import {
+  getSelectedOrgunitChild,
+  getSelectedOrgunitChildChildren
+} from 'src/app/store/selectors/organisation-unit.selectors';
 import {
   FormBuilder,
   FormGroup,
   FormControl,
   Validators
 } from '@angular/forms';
+import { editOrganisationUnitChild } from 'src/app/store/actions';
 
 @Component({
   selector: 'app-organisation-unit-edit',
@@ -19,8 +23,11 @@ import {
 })
 export class OrganisationUnitEditComponent implements OnInit, OnDestroy {
   orgunitSubscription: Subscription;
+  childSubscription: Subscription;
+
   selectedOrgunitChild$: Observable<OrganisationUnitChildren>;
   organisationUnitForm: FormGroup;
+  organisationUnit: OrganisationUnitChildren;
   constructor(
     private store: Store<State>,
     private route: ActivatedRoute,
@@ -36,33 +43,44 @@ export class OrganisationUnitEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.orgunitSubscription.unsubscribe();
+    this.childSubscription.unsubscribe();
   }
 
   generateForm() {
-    let orgunit: OrganisationUnitChildren = null;
     this.orgunitSubscription = this.selectedOrgunitChild$.subscribe(
-      child => (orgunit = child)
+      child => (this.organisationUnit = child)
     );
     return this.fb.group({
-      name: new FormControl(orgunit.name, Validators.required),
-      shortName: new FormControl(orgunit.shortName),
-      openingDate: new FormControl(orgunit.openingDate, Validators.required),
-      closedDate: new FormControl(orgunit.closedDate),
-      url: new FormControl(orgunit.url),
-      description: new FormControl(orgunit.description),
-      comments: new FormControl(orgunit.comment),
-      address: new FormControl(orgunit.address),
-      email: new FormControl(orgunit.email, Validators.email),
-      contactPerson: new FormControl(orgunit.contactPerson),
-      code: new FormControl(orgunit.code),
-      phoneNumber: new FormControl(orgunit.phoneNumber)
+      name: new FormControl(this.organisationUnit.name, Validators.required),
+      shortName: new FormControl(this.organisationUnit.shortName),
+      openingDate: new FormControl(
+        this.organisationUnit.openingDate,
+        Validators.required
+      ),
+      closedDate: new FormControl(this.organisationUnit.closedDate),
+      url: new FormControl(this.organisationUnit.url),
+      description: new FormControl(this.organisationUnit.description),
+      comments: new FormControl(this.organisationUnit.comment),
+      address: new FormControl(this.organisationUnit.address),
+      email: new FormControl(this.organisationUnit.email, Validators.email),
+      contactPerson: new FormControl(this.organisationUnit.contactPerson),
+      code: new FormControl(this.organisationUnit.code),
+      phoneNumber: new FormControl(this.organisationUnit.phoneNumber)
     });
   }
 
   editOrgunit(e) {
     e.stopPropagation();
-    console.log(this.organisationUnitForm.value);
-    this.router.navigate(['']);
+    this.childSubscription = this.store
+      .select(getSelectedOrgunitChildChildren(this.route.snapshot.params['id']))
+      .subscribe(children => {
+        const orgunit = {
+          ...this.organisationUnitForm.value,
+          children: children,
+          id: this.route.snapshot.params['id']
+        };
+        this.store.dispatch(editOrganisationUnitChild({ child: orgunit }));
+      });
   }
 
   onCancel(e) {

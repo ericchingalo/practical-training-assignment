@@ -38,10 +38,8 @@ import {
   MatNativeDateModule,
   MatButtonToggleModule
 } from '@angular/material';
-import { CompletenessComponent } from './pages/completeness/completeness.component';
-import { OrganisationUnitsComponent } from './pages/organisation-units/organisation-units.component';
-import { OrganisationUnitEditComponent } from './pages/organisation-unit-edit/organisation-unit-edit.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { OrganisationUnitDetailsComponent } from './pages/organisation-unit-details/organisation-unit-details.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -49,13 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ...fromPages.pages,
-    CompletenessComponent,
-    OrganisationUnitsComponent,
-    OrganisationUnitEditComponent
-  ],
+  declarations: [AppComponent, ...fromPages.pages],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -113,6 +105,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatCardModule,
     MatIconModule
   ],
+  entryComponents: [OrganisationUnitDetailsComponent],
   providers: [{ provide: RouterStateSerializer, useClass: RouteSerializer }],
   bootstrap: [AppComponent]
 })

@@ -49,6 +49,11 @@ export const getSelectedOrgunitChild = id =>
     getOrganisationUnitChildren,
     children => _.find(children, child => child.id === id)
   );
+export const getSelectedOrgunitChildChildren = id =>
+  createSelector(
+    getOrganisationUnitChildren,
+    children => _.find(children, child => child.id === id).children
+  );
 
 export const leafOrgunit = createSelector(
   getOrganisationUnitChildren,

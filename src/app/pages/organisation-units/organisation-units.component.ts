@@ -14,6 +14,7 @@ import {
   leafOrgunit
 } from 'src/app/store/selectors/organisation-unit.selectors';
 import { Router } from '@angular/router';
+import { deleteOrganisationUnitChild } from 'src/app/store/actions';
 
 @Component({
   selector: 'app-organisation-units',
@@ -48,5 +49,10 @@ export class OrganisationUnitsComponent implements OnInit {
   onEditChild(e, id: string) {
     e.stopPropagation();
     this.router.navigate([`edit-orgunit/${id}`]);
+  }
+
+  onDeleteChild(e, id: string) {
+    e.stopPropagation();
+    this.store.dispatch(deleteOrganisationUnitChild({ id: id }));
   }
 }

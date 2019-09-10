@@ -15,12 +15,14 @@ import {
 } from '../actions';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class OrganisationUnitEffects {
   constructor(
     private actions$: Actions,
-    private orgunitService: OrganisationUnitService
+    private orgunitService: OrganisationUnitService,
+    private router: Router
   ) {}
 
   selectOrganisationUnit$ = createEffect(() =>
@@ -52,18 +54,20 @@ export class OrganisationUnitEffects {
   editOrganisationUnitChild$ = createEffect(() =>
     this.actions$.pipe(
       ofType(editOrganisationUnitChild),
-      switchMap(action =>
-        this.orgunitService.editOrgunitChildren(action.child).pipe(
-          map(() =>
-            editOrganisationUnitChildSuccess({
+      switchMap(action => {
+        console.log(action);
+        return this.orgunitService.editOrgunitChildren(action.child).pipe(
+          map(() => {
+            this.router.navigate(['']);
+            return editOrganisationUnitChildSuccess({
               child: { id: action.child.id, changes: action.child }
-            })
-          ),
+            });
+          }),
           catchError(error =>
             of(editOrganisationUnitChildFail({ error: error }))
           )
-        )
-      )
+        );
+      })
     )
   );
 
