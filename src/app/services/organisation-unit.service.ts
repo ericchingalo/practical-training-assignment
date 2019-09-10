@@ -19,7 +19,7 @@ export class OrganisationUnitService {
 
   editOrgunitChildren(orgunitChild: OrganisationUnitChildren): Observable<any> {
     return this.httpServuice.put(
-      `organisationUnits/${orgunitChild.id}`,
+      `29/organisationUnits/${orgunitChild.id}?mergeMode=REPLACE`,
       orgunitChild
     );
   }

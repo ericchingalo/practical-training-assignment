@@ -29,25 +29,25 @@ export const deleteOrganisationUnitChild = createAction(
   props<{ id: string }>()
 );
 export const deleteOrganisationUnitChildFail = createAction(
-  '[ORGANISATION UNIT] delete Organisation Unit',
+  '[ORGANISATION UNIT] delete Organisation Unit Fail',
   props<{ error: ErrorMessage }>()
 );
 export const deleteOrganisationUnitChildSuccess = createAction(
-  '[ORGANISATION UNIT] delete Organisation Unit',
+  '[ORGANISATION UNIT] delete Organisation Unit Success',
   props<{ id: string }>()
 );
 
 export const editOrganisationUnitChild = createAction(
-  '[ORGANISATION UNIT] delete Organisation Unit ',
+  '[ORGANISATION UNIT] edit Organisation Unit ',
   props<{ child: OrganisationUnitChildren }>()
 );
 
 export const editOrganisationUnitChildFail = createAction(
-  '[ORGANISATION UNIT] delete Organisation Unit ',
+  '[ORGANISATION UNIT] edit Organisation Unit Fail',
   props<{ error: ErrorMessage }>()
 );
 export const editOrganisationUnitChildSuccess = createAction(
-  '[ORGANISATION UNIT] delete Organisation Unit ',
+  '[ORGANISATION UNIT] edit Organisation Unit Success',
   props<{ child: Update<OrganisationUnitChildren> }>()
 );
 export const clearOrganisationUnitChildren = createAction(
