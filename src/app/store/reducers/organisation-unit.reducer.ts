@@ -71,9 +71,9 @@ export const orgunitChildrenReducer = createReducer(
   })),
   on(deleteOrganisationUnitChildFail, (state, { error }) => ({
     ...state,
-    ...errorBaseState,
     deleted: false,
     deleting: false,
+    hasError: true,
     error
   })),
   on(deleteOrganisationUnitChildSuccess, (state, { id }) =>
@@ -86,7 +86,7 @@ export const orgunitChildrenReducer = createReducer(
   })),
   on(editOrganisationUnitChildFail, (state, { error }) => ({
     ...state,
-    ...errorBaseState,
+    hasError: true,
     edited: false,
     editing: false,
     error

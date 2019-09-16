@@ -38,6 +38,7 @@ import {
   MatNativeDateModule,
   MatButtonToggleModule,
   MatDialogModule,
+  MatSnackBarModule,
   MatProgressBarModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -70,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatInputModule,
     MatDatepickerModule,
     MatDialogModule,
+    MatSnackBarModule,
     MatNativeDateModule,
     MatProgressBarModule,
     MatButtonToggleModule,

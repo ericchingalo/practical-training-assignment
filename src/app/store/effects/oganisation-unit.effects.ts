@@ -13,16 +13,19 @@ import {
   deleteOrganisationUnitChildSuccess,
   deleteOrganisationUnitChildFail
 } from '../actions';
+import { ErrorMessage } from 'src/app/core/models/error-message.model';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class OrganisationUnitEffects {
   constructor(
     private actions$: Actions,
     private orgunitService: OrganisationUnitService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
 
   selectOrganisationUnit$ = createEffect(() =>
@@ -55,9 +58,14 @@ export class OrganisationUnitEffects {
     this.actions$.pipe(
       ofType(editOrganisationUnitChild),
       switchMap(action => {
-        console.log(action);
+        this._snackBar.open(`Editing ${action.child.name}`, '', {
+          duration: 2000
+        });
         return this.orgunitService.editOrgunitChildren(action.child).pipe(
           map(() => {
+            this._snackBar.open(`Edited Successfully`, '', {
+              duration: 2000
+            });
             this.router.navigate([
               `/organisationunit/${action.child.parent.id}`
             ]);
@@ -65,9 +73,12 @@ export class OrganisationUnitEffects {
               child: { id: action.child.id, changes: action.child }
             });
           }),
-          catchError(error =>
-            of(editOrganisationUnitChildFail({ error: error }))
-          )
+          catchError(error => {
+            this._snackBar.open(`Filed To Edit`, '', {
+              duration: 2000
+            });
+            return of(editOrganisationUnitChildFail({ error: error }));
+          })
         );
       })
     )
@@ -78,10 +89,18 @@ export class OrganisationUnitEffects {
       ofType(deleteOrganisationUnitChild),
       switchMap(action =>
         this.orgunitService.deleteOrgunitChild(action.id).pipe(
-          map(() => deleteOrganisationUnitChildSuccess({ id: action.id })),
-          catchError(error =>
-            of(deleteOrganisationUnitChildFail({ error: error }))
-          )
+          map(() => {
+            this._snackBar.open(`Deleted Successfully`, '', {
+              duration: 2000
+            });
+            return deleteOrganisationUnitChildSuccess({ id: action.id });
+          }),
+          catchError((error: ErrorMessage) => {
+            this._snackBar.open(error.message, '', {
+              duration: 2000
+            });
+            return of(deleteOrganisationUnitChildFail({ error: error }));
+          })
         )
       )
     )
