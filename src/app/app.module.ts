@@ -24,8 +24,25 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { NgxDhis2MenuModule } from '@iapps/ngx-dhis2-menu';
+import { NgxDhis2OrgUnitFilterModule } from '@iapps/ngx-dhis2-org-unit-filter';
 import * as fromPages from './pages';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import {
+  MatMenuModule,
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatButtonToggleModule,
+  MatDialogModule,
+  MatSnackBarModule,
+  MatProgressBarModule
+} from '@angular/material';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { OrganisationUnitDetailsComponent } from './pages/organisation-unit-details/organisation-unit-details.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -48,10 +65,25 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatNativeDateModule,
+    MatProgressBarModule,
+    MatButtonToggleModule,
     /**
      * Menu  module
      */
     NgxDhis2MenuModule,
+
+    /**
+     * Organisationunit filter module
+     */
+    NgxDhis2OrgUnitFilterModule,
 
     /**
      * Translation module
@@ -73,8 +105,13 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
-    })
+    }),
+    MatMenuModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule
   ],
+  entryComponents: [OrganisationUnitDetailsComponent],
   providers: [{ provide: RouterStateSerializer, useClass: RouteSerializer }],
   bootstrap: [AppComponent]
 })
