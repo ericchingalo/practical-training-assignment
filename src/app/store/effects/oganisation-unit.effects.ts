@@ -87,8 +87,11 @@ export class OrganisationUnitEffects {
   deleteOrganisationUnitChild$ = createEffect(() =>
     this.actions$.pipe(
       ofType(deleteOrganisationUnitChild),
-      switchMap(action =>
-        this.orgunitService.deleteOrgunitChild(action.id).pipe(
+      switchMap(action => {
+        this._snackBar.open(`Deleting Organisation Unit`, '', {
+          duration: 1000
+        });
+        return this.orgunitService.deleteOrgunitChild(action.id).pipe(
           map(() => {
             this._snackBar.open(`Deleted Successfully`, '', {
               duration: 2000
@@ -101,8 +104,8 @@ export class OrganisationUnitEffects {
             });
             return of(deleteOrganisationUnitChildFail({ error: error }));
           })
-        )
-      )
+        );
+      })
     )
   );
 }

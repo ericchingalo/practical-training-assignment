@@ -28,11 +28,15 @@ export class HomeComponent implements OnInit {
   onOrgUnitUpdate(orgunitData: any, action: string) {
     const selectedOrganisationUnit = orgunitData.items[0];
     this.store.dispatch(clearOrganisationUnitChildren());
-    this.store.dispatch(
-      selectOrganisationUnitSuccess({
-        organisationUnit: selectedOrganisationUnit
-      })
-    );
-    this.router.navigate([`/organisationunit/${selectedOrganisationUnit.id}`]);
+    if (selectedOrganisationUnit.id !== 'USER_ORGUNIT') {
+      this.store.dispatch(
+        selectOrganisationUnitSuccess({
+          organisationUnit: selectedOrganisationUnit
+        })
+      );
+      this.router.navigate([
+        `/organisationunit/${selectedOrganisationUnit.id}`
+      ]);
+    }
   }
 }
