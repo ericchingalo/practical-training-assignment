@@ -1,6 +1,6 @@
 <div *ngIf="selectedOrganisationUnitStatus$ | async">
   <mat-card>
-    <h4>Selected Organisation unit:</h4>
+    <!-- <h4>Selected Organisation unit:</h4> -->
     <p>Name: {{ (selectedOrganisationUnit$ | async).name }}</p>
     <p>Level: {{ (selectedOrganisationUnit$ | async).level }}</p>
   </mat-card>
@@ -77,5 +77,5 @@
 </div>
 
 <div *ngIf="!(selectedOrganisationUnitStatus$ | async)">
-  <p>select Organisation unit</p>
+  <!-- <p>select Organisation unit</p> -->
 </div>
