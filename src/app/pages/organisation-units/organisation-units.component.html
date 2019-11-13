@@ -1,7 +1,6 @@
-{{organisationUnitChildren$ | async | json}}
-
-<!-- <div *ngIf="selectedOrganisationUnitStatus$ | async">
+<div *ngIf="selectedOrganisationUnitStatus$ | async">
   <mat-card>
+    <!-- <h4>Selected Organisation unit:</h4> -->
     <p>Name: {{ (selectedOrganisationUnit$ | async).name }}</p>
     <p>Level: {{ (selectedOrganisationUnit$ | async).level }}</p>
   </mat-card>
@@ -12,13 +11,15 @@
       !(isLeafOrganisation$ | async)
     "
   >
-    <h5 class="header">Children:</h5>
+    <h5 class="header">Facilities:</h5>
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
           <th scope="col">S/N</th>
           <th scope="col">Name</th>
           <th scope="col">Last Updated</th>
+          <th scope="col">Contact Person</th>
+          <th scope="col">Dispenser's Contact</th>
           <th></th>
         </tr>
       </thead>
@@ -32,6 +33,8 @@
           <td>{{ count + 1 }}</td>
           <td>{{ orgunitChild.name }}</td>
           <td>{{ orgunitChild.lastUpdated | date }}</td>
+          <td>{{ orgunitChild.phoneNumber }}</td>
+          <td>{{ orgunitChild.attributeValues }}</td>
           <td>
             <button
               mat-icon-button
@@ -47,7 +50,8 @@
                 (click)="onEditChild($event, orgunitChild.id)"
               >
                 <mat-icon>edit</mat-icon>
-                <span>Edit</span>
+                <span>Edit</span> <mat-icon>details</mat-icon>
+                <span>Details</span>
               </button>
               <button
                 mat-menu-item
@@ -56,6 +60,14 @@
                 <mat-icon>details</mat-icon>
                 <span>Details</span>
               </button>
+              <!-- <button
+                *ngIf="orgunitChild.leaf"
+                mat-menu-item
+                (click)="onDeleteChild($event, orgunitChild.id)"
+              >
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button> -->
             </mat-menu>
           </td>
         </tr>
@@ -65,9 +77,10 @@
 
   <div *ngIf="!(organisationUnitChildrenLoaded$ | async)">
     <p><mat-progress-bar mode="query"></mat-progress-bar></p>
-    <p>Loading children</p>
+    <p>Loading Facilities</p>
   </div>
 </div>
 
 <div *ngIf="!(selectedOrganisationUnitStatus$ | async)">
-</div> -->
+  <!-- <p>select Organisation unit</p> -->
+</div>
