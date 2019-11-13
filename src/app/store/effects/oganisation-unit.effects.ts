@@ -43,7 +43,7 @@ export class OrganisationUnitEffects {
         this.orgunitService.getOrgunitChildren(action.id).pipe(
           map(organisationUnitChildren =>
             loadOrganisationUnitChildrenSuccess({
-              children: organisationUnitChildren.children
+              children: organisationUnitChildren ? organisationUnitChildren.organisationUnits : []
             })
           ),
           catchError(err =>

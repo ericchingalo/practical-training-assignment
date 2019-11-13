@@ -29,4 +29,15 @@ export interface OrganisationUnitChildren {
   parent: { id: string };
   coordinates: string;
   childern: OrganisationUnit[];
+  attributeValues: Array<AttributeValues>;
+}
+
+export interface AttributeValues {
+  value: string;
+  attribute: Attribute;
+}
+
+export interface Attribute {
+  name: string;
+  id: string;
 }

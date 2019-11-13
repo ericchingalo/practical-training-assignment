@@ -11,9 +11,9 @@ export class OrganisationUnitService {
   s;
   getOrgunitChildren(orgunitId: string): Observable<any> {
     const fields =
-      'fields=name,children[id,lastUpdated,contactPerson,level,name,shortName,leaf,displayName,displayShortName,openingDate,parent,path,coordinates,children[id,name,level]]';
+      'id,name,lastUpdated,phoneNumber,level,attributeValues[value,attribute[id,name]]';
     return this.httpServuice.get(
-      `organisationUnits/${orgunitId}.json?fields=${fields}`
+      `organisationUnits.json?fields=${fields}&filter=path:ilike:${orgunitId}&filter=level:eq:6&paging=false`
     );
   }
 
