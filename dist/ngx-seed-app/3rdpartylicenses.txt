@@ -62,6 +62,8 @@ THE SOFTWARE.
 
 @angular/material/button
 
+@angular/material/card
+
 @angular/material/checkbox
 
 @angular/material/core
@@ -72,9 +74,13 @@ THE SOFTWARE.
 
 @angular/material/form-field
 
+@angular/material/icon
+
 @angular/material/list
 
 @angular/material/menu
+
+@angular/material/progress-bar
 
 @angular/material/snack-bar
 
